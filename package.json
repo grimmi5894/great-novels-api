@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "env-cmd nodemon index.js",
+    "dev:migrate": "env-cmd sequelize db:migrate --env development --config ./configs/sequelize.js",
     "lint": "./node_modules/.bin/eslint --format codeframe .",
     "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe ."
   },
@@ -21,7 +22,8 @@
   "dependencies": {
     "express": "^4.17.2",
     "mysql2": "^2.3.3",
-    "sequelize": "^5.22.5"
+    "sequelize": "^5.22.5",
+    "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
