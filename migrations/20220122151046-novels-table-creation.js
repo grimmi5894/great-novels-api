@@ -3,15 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.createTable('novels', {
-      novelId: {
+      id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+      title: { type: Sequelize.STRING },
+      authorId: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
-        references: {
-          model: {
-            tableName: 'novels',
-          },
-          key: 'id'
-        }
+        references: { model: 'authors', key: 'id' }
       },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('NOW()') },
       updatedAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('NOW() ON UPDATE NOW()') },

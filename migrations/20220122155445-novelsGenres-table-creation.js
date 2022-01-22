@@ -3,30 +3,8 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.createTable('novelsGenres', {
-      novelId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        references: {
-          model: {
-            tableName: 'novels',
-          },
-          key: 'id'
-        }
-      },
-      createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('NOW()') },
-      updatedAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('NOW() ON UPDATE NOW()') },
-      deletedAt: { type: Sequelize.DATE }
-    }, {
-      genreId: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        references: {
-          model: {
-            tableName: 'genres',
-          },
-          key: 'id'
-        }
-      },
+      novelId: { type: Sequelize.INTEGER, references: { model: 'novels', key: 'id' } },
+      genreId: { type: Sequelize.INTEGER, references: { model: 'genres', key: 'id' } },
       createdAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('NOW()') },
       updatedAt: { type: Sequelize.DATE, defaultValue: Sequelize.literal('NOW() ON UPDATE NOW()') },
       deletedAt: { type: Sequelize.DATE }
