@@ -6,11 +6,15 @@ const getAllAuthors = async (request, response) => {
   return response.send(authors)
 }
 
-const getAuthorById = async (request, response) => {
-  const { id } = request.params
+const getAuthorByIdentifier = async (request, response) => {
+  const { identifier } = request.params
 
   const author = await models.authors.findOne({
-    where: { id },
+    where: {
+      [models.Op.or]: [
+        { id: { [models.Op.like]: `%${identifier}%` } },
+        { nameLast: { [models.Op.like]: `%${identifier}%` } }]
+    },
     include: [{
       model: models.novels,
       include: [{ model: models.genres }]
@@ -22,4 +26,4 @@ const getAuthorById = async (request, response) => {
     : response.sendStatus(404)
 }
 
-module.exports = { getAllAuthors, getAuthorById }
+module.exports = { getAllAuthors, getAuthorByIdentifier }
